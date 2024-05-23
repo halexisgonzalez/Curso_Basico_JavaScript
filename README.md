@@ -46,3 +46,20 @@ Se puede utilizar JavaScript con un framework que se llama **React Native** para
 Se pueden construir aplicaciones de escritorio con JavaScript, usando un framework llamado **Electron**, puede correr en Mac o Windows.
 
 También en la parte del **Back-end** o **IOT** (Internet Od Things) se puede utilizar Js. Esto es posible con un Framework llamado **NodeJS**, el cual es un entorno de ejecución de JavaScript que corre directamente en el Back-end.
+
+### Elementos de un Lenguaje de Programación: Variables, Funciones y Sintaxis
+
+**Valores Primitivos** 
+
+Son los valores básicos que se utilizan para poder generar códigos.
+
+* **Número:** valor sólo de tipo numérico, ejem: 1 2 3 4, etc.
+* **String:** texto, se utiliza entre comillas dobles. “Haciendo esto”, “Diego Hernández”
+* **Boolean o Booleano:** son valores creados por George Boolean dentro de lenguajes de programación para poder validar cosas y/o desiciones, por ello se utilizan: true (1) o false (0).
+* **Empty values:** ***null*** o ***undefined***, se les conoce como valores “placeholders”, pero son valores reservados para un tipo de valor que queda faltante en memoria. También pueden ser tomados como valores de errores.
+
+**Valores No Primitivos o Valores Tipo Objetos**
+
+* **Array:** se genera ocupando *corchetes*, los cuales dentro ocupan valores primitivos, ejem: [1,2,3] convirtiéndolos en valores tipo objeto.
+* **Valor tipo Objeto:** se generan con *llaves*, los cuales dentro ocupan una data que se transforma en objeto, ejem de sintaxis: { nombre: “Diego”}.
+
