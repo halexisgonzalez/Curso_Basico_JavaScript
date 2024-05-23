@@ -34,3 +34,15 @@ La compatibilidad con versiones anteriores significa que cuando se acepta como J
 **JS Compilador**
 
 Se utilza BABEL para realizar compatibilidad entre la nueva versión de JS y la antigua.
+
+### ¿Por qué JavaScript?
+
+JavaScript tiene una comunidad enorme de desarrolladores que pueden ayudar a generar diferentes cosas.
+
+Existen muchos frameworks y librerías construidas en JavaScript que ayudan a hacer proyectos de forma mucho mas rápida, eficiente y robusta para **WEB** (Angular, View, React, entre otros).
+
+Se puede utilizar JavaScript con un framework que se llama **React Native** para poder construir aplicaciones nativas como Android y IOS.
+
+Se pueden construir aplicaciones de escritorio con JavaScript, usando un framework llamado **Electron**, puede correr en Mac o Windows.
+
+También en la parte del **Back-end** o **IOT** (Internet Od Things) se puede utilizar Js. Esto es posible con un Framework llamado **NodeJS**, el cual es un entorno de ejecución de JavaScript que corre directamente en el Back-end.
