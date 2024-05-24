@@ -193,3 +193,181 @@ Ej. Universo, seria como el todo, las variables son accesibles desde cualquier p
 Ej. Cada Planeta, un mundo distinto, las variables son accesibles en ese mundo, no es visible para los demás mundos.
 
 *Lo que es global se puede acceder desde cualquier parte de tu código, y lo pueden acceder cada mundo, lo que es local solo lo puede acceder cada mundo.*
+
+### Hoisting
+
+El Hoisting es un proceso del compilador de JavaScript, que consiste en que la declaracion de las variables y las funciones son llevadas al inicio del codigo, sin importar su posicion, para su procesamiento, sin embargo, la inicializacion de las variables no es llevada al inicio del codigo para su compilacion, sino solo su declaracion, lo cual suele dar espacio a errores cuando se declara una variable sin inicializarla y se procesa en el codigo antes de haber llegado a su inicializacion, lo cual nos suele dar una variable con valor undefined, ya que la variable sí fue almacenada en memoria, pero no se le asigno un valor hasta despues de su ejecución.
+
+```
+saludo();
+         
+function saludo() {
+    console.log("Hola" + nombre);
+}
+
+var nombre = "Aaron";
+```
+El output de este codigo seria el siguiente:
+`Hola undefined`
+
+Debido a que como lo hemos dicho, la variable se tomo en cuenta y se le asigno memoria, sin embargo, el compilador no la inicializo y se le dio el valor de undefined, y con ese valor se ingreso a la funcion, y ya despues de correr la funcion se le asigno el valor.
+
+Este comportamiendo se puede entender facilmente si se comprenden estos dos puntos esenciales:
+
+* Las funciones siempre se mueven arriba del scope. Por lo tanto, podemos elegir donde declararlas y usarlas.
+
+* La declaración de las variables se mueven arriba del scope, pero no la asignación. Antes de usar una variable, habrá que crearla y asignarla.
+
+En base al segundo punto, fue por eso que se cometio el error de usar la variable antes de inicializarla, pues sin problema el compilador le asigna memoria, pero no el valor hasta despues.
+
+Basicamente por pasos, lo que hizo el compilador fue esto:
+
+Tenemos el codigo asi:
+
+```
+saludo();
+
+function saludo() {
+    console.log("Hola" + nombre);
+}
+
+var nombre = "Aaron";
+```
+
+1. El compilador toma las funciones y variables y las "sube" en el codigo, sin inicializar variables:
+
+```
+var nombre;
+
+function saludo() {
+    console.log(`"Hola " + nombre);
+}
+
+saludo();
+
+var nombre = "Aaron";
+```
+
+2. Le asigna memoria a la variable y le da el valor de undefined al suceder la asignacion de memoria
+
+```
+var nombre = undefined;
+
+function saludo() {
+    console.log("Hola " + nombre);
+}
+
+saludo();
+
+nombre = "Aaron";
+```
+Y como hemos visto, la variable se asigna como undefined y posteriormente su utiliza al llegar a la linea:
+`saludos()`
+pues ahi lo que hace es ejecutar la funcion que ya fue procesada, pero con un valor de la variable que aun no se le asigno, quedando como ***undefined***.
+
+3. Despues de correr la funcion, le asigna el valor correcto a la variable ya declarada:
+
+```
+var nombre = "Aaron";
+
+function saludo() {
+    console.log("Hola " + nombre);
+}
+
+saludo();
+```
+Pero ya es demasiado tarde, pues la funcion ya fue ejecutada.
+
+Es por eso que se tiene como buena practica declarar e inicializar tanto variables como funciones al inicio de nuestro programa, sin importar donde sean utilizadas, pues de esta manera se evita usarlas antes de ser inicializadas.
+
+Debemos saber que el hoisting solo sucede con las palabras claves var y function, por lo tanto esto nos dice que solo se da en las versiones de ECMAScript 5 o Inferiores, ya que en la version 6 y superiores se permite la declaracion de variables con let y const, que son dos nuevas variables que no activan hoisting.
+
+### Coerción
+
+La **coerción** consiste en transformar de un tipo de dato a otro de una variable. Existen dos tipos de coerción: implícita y explícita.
+
+**Qué es la coerción implícita**
+
+La coerción implícita consiste en la transformación de tipos mediante la ayuda de JavaScript. Esto ocurre en operaciones de diferentes tipos, ya que es un lenguaje débil y dinámicamente tipado.
+
+Al momento de compilar el código, el motor de JavaScript, si encuentra alguna incoherencia (una suma de un número con un string), el motor lo interpreta a su manera y arroja un valor que puede ser erróneo.
+
+Algunos de los ejemplos de coerción implícita son los siguientes:
+```
+4 + "7" // 47
+4 * "7" // 28
+2 + true // 3
+false - 3 // -3
+!3 // false
+```
+
+Para evitar esto realiza la coerción explícita para manejar tipos de datos iguales antes de realizar cualquier operación.
+
+*Qué es la coerción explícita*
+
+La coerción explícita es la transformación de tipos de datos que controlamos el resultado. Para realizar estas transformaciones utiliza las funciones *Number(), String() y Boolean(),* para convertir a tipo número, string y lógico, respectivamente.
+
+```
+Number("47") // 47
+String(51) // "51"
+Boolean(1) // true
+```
+
+Se puede utilizar la palabra reservada *typeof* para comprobar el tipo de dato transformado.
+
+```
+Number("47") // 'number'
+String(51) // 'string'
+Boolean(1) // 'boolean'
+```
+
+### Valores: Truthy y Falsy
+
+Los valores truthy y falsy son valores verdaderos y falsos cuando se realiza una coerción de cualquier tipo a booleano, respectivamente. Esto es importante para manejar condicionales, ya que una estructura condicional evalúa si un valor es verdadero o falso en un contexto booleano.
+
+*Qué son los valores falsy*
+
+Un valor falsy es aquel que es falso en un contexto booleano, estos son: 0, "" (string vacío), false, NaN, undefined o null.
+
+```
+// Coersión explícita
+Boolean(0) // false
+Boolean("") // false
+Boolean(null) // false
+Boolean(undefined) // false
+Boolean(NaN) // false
+Boolean(false) // false
+```
+
+*También se puede realizar una coerción implícita con el operador de negación (!), pero solo es para mencionarlo, no es recomendable su uso.*
+
+```
+// Coersión implícita (no la uses)
+!!0 // false
+!!"" // false
+!!null // false
+!!undefined // false
+!!NaN // false
+!!false // false
+```
+
+*Qué son los valores truthy*
+
+Un valor truthy es aquel que es verdadero en un contexto booleano, son todos los valores que no sean falsy, que especificamos en la anterior sección.
+
+```
+// Coersión explícita
+Boolean(12) // true
+Boolean("hola") // true
+Boolean(true) // true
+Boolean([1, 2, 3]) // true
+Boolean(function hola() {}) // true
+Boolean({ a: 1, b: 2 }) // true
+```
+
+Cabe recalcar que en JavaScript **todo valor que no sea falsy es truthy incluyendo las estructuras vacías de array y objetos.**
+
+```
+Boolean([]) // true
+Boolean({}) // true
+```
