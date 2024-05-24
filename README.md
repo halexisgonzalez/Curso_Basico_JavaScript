@@ -180,3 +180,16 @@ En la expresión de función, la función podría o no llevar nombre, aunque es 
 A las funciones declarativas se les aplica hoisting, y a la expresión de función, no. Ya que el hoisting solo se aplica en las palabras reservadas var y function.
 
 Lo que quiere decir que con las funciones declarativas, podemos mandar llamar la función antes de que ésta sea declarada, y con la expresión de función, no, tendríamos que declararla primero, y después mandarla llamar.
+
+## Bases de JavaScript
+### Scope
+
+* **Global**
+
+Ej. Universo, seria como el todo, las variables son accesibles desde cualquier parte del código. 
+
+* **Local**
+
+Ej. Cada Planeta, un mundo distinto, las variables son accesibles en ese mundo, no es visible para los demás mundos.
+
+*Lo que es global se puede acceder desde cualquier parte de tu código, y lo pueden acceder cada mundo, lo que es local solo lo puede acceder cada mundo.*
